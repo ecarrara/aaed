@@ -1,0 +1,26 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 merge ./results/testset/100_0.8_t_f.bin':
+
+              1.90 msec task-clock:u              #    0.850 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               123      page-faults:u             #    0.065 M/sec                  
+         3,521,251      cycles:u                  #    1.849 GHz                    
+           480,848      stalled-cycles-frontend:u #   13.66% frontend cycles idle   
+     <not counted>      stalled-cycles-backend:u                                      (0.00%)
+     <not counted>      instructions:u                                                (0.00%)
+     <not counted>      branches:u                                                    (0.00%)
+     <not counted>      branch-misses:u                                               (0.00%)
+
+       0.002240187 seconds time elapsed
+
+       0.002250000 seconds user
+       0.000000000 seconds sys
+
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

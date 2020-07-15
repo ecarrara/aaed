@@ -1,0 +1,23 @@
+# started on Wed Jul 15 13:12:10 2020
+
+
+ Performance counter stats for './p1 bubble ./results/testset/100000_0.8_t_t.bin':
+
+         25,796.91 msec task-clock:u              #    0.964 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               220      page-faults:u             #    0.009 K/sec                  
+    84,136,118,648      cycles:u                  #    3.261 GHz                      (83.35%)
+    34,874,354,829      stalled-cycles-frontend:u #   41.45% frontend cycles idle     (83.33%)
+     1,949,788,799      stalled-cycles-backend:u  #    2.32% backend cycles idle      (33.32%)
+    39,963,395,072      instructions:u            #    0.47  insn per cycle         
+                                                  #    0.87  stalled cycles per insn  (49.96%)
+     9,995,523,891      branches:u                #  387.470 M/sec                    (66.62%)
+       572,476,091      branch-misses:u           #    5.73% of all branches          (83.26%)
+
+      26.747304065 seconds time elapsed
+
+      25.628343000 seconds user
+       0.006582000 seconds sys
+
+

@@ -1,0 +1,26 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 heap ./results/testset/100_0.8_t_t.bin':
+
+              1.92 msec task-clock:u              #    0.760 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               121      page-faults:u             #    0.063 M/sec                  
+         3,756,785      cycles:u                  #    1.962 GHz                    
+           453,071      stalled-cycles-frontend:u #   12.06% frontend cycles idle   
+     <not counted>      stalled-cycles-backend:u                                      (0.00%)
+     <not counted>      instructions:u                                                (0.00%)
+     <not counted>      branches:u                                                    (0.00%)
+     <not counted>      branch-misses:u                                               (0.00%)
+
+       0.002521455 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002581000 seconds sys
+
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

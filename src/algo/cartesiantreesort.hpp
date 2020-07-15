@@ -2,6 +2,7 @@
 #define ALGO_CARTESIANTREESORT_H
 
 #include "../graph.hpp"
+#include <iostream>
 #include <queue>
 
 // references:
@@ -11,10 +12,10 @@
 template <typename T>
 struct cartesian_tree {
     node<T> *root = nullptr;
-    node<T> *last = nullptr; // optimize add_node!
+    node<T> *last = nullptr;
 
     void add_node(T value) {
-        node<T> *new_node = new node<T>(value); //  TODO: memory leak?
+        node<T> *new_node = new node<T>(value);
 
         if (root == nullptr) {
             last = new_node;
@@ -51,27 +52,28 @@ template <typename T>
 void cartesiantree_sort(std::vector<T> &in) {
     cartesian_tree<T> tree;
 
-    std::vector<T> sorted(in.size());
-
     for (T value : in) {
         tree.add_node(value);
     }
 
-    // std::priority_queue<node<T> *, std::vector<node<T> *>, std::greater<node<T> *>> prio_queue;
-    // prio_queue.push(tree.root);
+    auto cmp = [](node<T> *a, node<T> *b) { return a->data > b->data; };
+    std::priority_queue<node<T> *, std::vector<node<T> *>, decltype(cmp)> prio_queue(cmp);
+    prio_queue.push(tree.root);
 
-    // while (!prio_queue.empty()) {
-    //     node<T> *aux = prio_queue.top();
-    //     prio_queue.pop();
+    size_t i = 0;
+    while (!prio_queue.empty()) {
+        node<T> *aux = prio_queue.top();
+        prio_queue.pop();
 
-    //     sorted.push_back(aux->data);
-    //     if (aux->left) {
-    //         prio_queue.push(aux->left);
-    //     }
-    //     if (aux->right) {
-    //         prio_queue.push(aux->right);
-    //     }
-    // }
+        in[i++] = aux->data;
+
+        if (aux->left) {
+            prio_queue.push(aux->left);
+        }
+        if (aux->right) {
+            prio_queue.push(aux->right);
+        }
+    }
 };
 
 #endif /* ALGO_CARTESIANTREESORT_H */

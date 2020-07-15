@@ -1,37 +1,39 @@
 #ifndef ALGO_QUICKSORT_H
 #define ALGO_QUICKSORT_H
 
+#include <iostream>
 #include <vector>
 
 template <typename T>
-void quick_sort_partition(std::vector<T> &in, int p, int r, int *q, int *t) {
+void quick_sort_partition(std::vector<T> &in, size_t p, size_t r, long long *q, long long *t) {
     T x = in[r];
-    size_t i = p - 1;
-    size_t j = p;
-    size_t k = r;
+    long long i = p - 1;
+    long long j = p;
+    long long k = r;
 
     while (j <= k - 1) {
         if (in[j] < x) {
-            i = i + 1;
+            i++;
             std::swap(in[i], in[j]);
         } else if (in[j] == x) {
-            k -= 1;
+            k--;
             std::swap(in[j], in[k]);
-            j -= 1;
+            j--;
         }
-
-        *q = i + 1;
-        for (j = k; j <= r; j++) {
-            i = i + 1;
-            std::swap(in[i], in[j]);
-        }
-        *t = i;
+        j++;
     }
+
+    *q = i + 1;
+    for (j = k; j <= r; j++) {
+        i++;
+        std::swap(in[i], in[j]);
+    }
+    *t = i;
 }
 
 template <typename T>
-void quick_sort_sort(std::vector<T> &in, int p, int r) {
-    size_t q, t;
+void quick_sort_sort(std::vector<T> &in, long long p, long long r) {
+    long long q, t;
     while (p < r) {
         quick_sort_partition(in, p, r, &q, &t);
 
@@ -47,17 +49,7 @@ void quick_sort_sort(std::vector<T> &in, int p, int r) {
 
 template <typename T>
 void quick_sort(std::vector<T> &in) {
-    for (int i = 0; i < in.size() - 1; i++) {
-        size_t min = i;
-
-        for (size_t j = i + 1; j < in.size(); j++) {
-            if (in[j] < in[min]) {
-                min = j;
-            }
-        }
-
-        std::swap(in[i], in[min]);
-    }
+    quick_sort_sort(in, 0, in.size() - 1);
 }
 
 #endif /* ALGO_QUICKSORT_H */

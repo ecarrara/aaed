@@ -1,0 +1,103 @@
+```julia
+import CSV
+using DataFrames
+using Gadfly
+using Query
+import Cairo, Fontconfig
+Gadfly.set_default_plot_size(18cm, 12cm)
+```
+
+
+```julia
+df = CSV.File("/home/ecarrara/code/personal/unifesp-eead/results/times.csv") |> DataFrame!
+df
+```
+
+```julia
+df_random = df[(df[:rng] .== "t") .& (df[:order] .== "f") .& (df[:random] .== 0.0), :]
+sort!(df_random, :algo)
+sort!(df_random, :size)
+
+df_random[!, :msec] = df_random[!, :time] .* 1000
+
+plot(df_random, x=:size, y=:msec, color=:algo,
+  Geom.point, Geom.line, Scale.x_log10, Scale.y_log10,
+  Guide.title("Tempo de Ordenação - Arranjo Aleatório"),
+  Guide.xlabel("Tamanho do Vetor"),
+  Guide.ylabel("Tempo (msec)"),
+  Guide.colorkey(title="Algoritmo", pos=[5mm, -25mm])
+) |> PDF("/tmp/tempo_ordenacao_aleatorio.pdf")
+```
+
+```julia
+df_sorted = df[(df[:rng] .== "f") .& (df[:order] .== "t") .& (df[:random] .== 1.0), :]
+sort!(df_sorted, :algo)
+sort!(df_sorted, :size)
+
+df_sorted[!, :msec] = df_sorted[!, :time] .* 1000
+
+plot(df_sorted, x=:size, y=:msec, color=:algo,
+  Geom.point, Geom.line, Scale.x_log10, Scale.y_log10,
+  Guide.title("Tempo de Ordenação - Arranjo Ordenado"),
+  Guide.xlabel("Tamanho do Vetor"),
+  Guide.ylabel("Tempo (msec)"),
+  Guide.colorkey(title="Algoritmo", pos=[5mm, -25mm])
+) |> PDF("/tmp/tempo_ordenacao_ordenado.pdf")
+```
+
+```julia
+df_revsorted = df[(df[:rng] .== "f") .& (df[:order] .== "f") .& (df[:random] .== 1.0), :]
+sort!(df_revsorted, :algo)
+sort!(df_revsorted, :size)
+
+df_revsorted[!, :msec] = df_revsorted[!, :time] .* 1000
+
+plot(df_revsorted, x=:size, y=:msec, color=:algo,
+  Geom.point, Geom.line, Scale.x_log10, Scale.y_log10,
+  Guide.title("Tempo de Ordenação - Arranjo Inversamente Ordenado"),
+  Guide.xlabel("Tamanho do Vetor"),
+  Guide.ylabel("Tempo (msec)"),
+  Guide.colorkey(title="Algoritmo", pos=[5mm, -25mm])
+) |> PDF("/tmp/tempo_ordenacao_inversamente_ordenado.pdf")
+```
+
+```julia
+df_almostsorted = df[(df[:rng] .== "f") .& (df[:order] .== "f") .& (df[:random] .== 0.95), :]
+sort!(df_almostsorted, :algo)
+sort!(df_almostsorted, :size)
+
+df_almostsorted[!, :msec] = df_almostsorted[!, :time] .* 1000
+
+plot(df_almostsorted, x=:size, y=:msec, color=:algo,
+  Geom.point, Geom.line, Scale.x_log10, Scale.y_log10,
+  Guide.title("Tempo de Ordenação - Arranjo Quase Ordenado"),
+  Guide.xlabel("Tamanho do Vetor"),
+  Guide.ylabel("Tempo (msec)"),
+  Guide.colorkey(title="Algoritmo", pos=[5mm, -25mm])
+) # |> PDF("/tmp/tempo_ordenacao_quase_ordenado.pdf")
+```
+
+
+```julia
+df[:, :caso] = ""
+df[(df[:rng] .== "f") .& (df[:order] .== "f") .& (df[:random] .== 1.0), :caso] = "Inversamente Ordenado"
+df[(df[:rng] .== "f") .& (df[:order] .== "t") .& (df[:random] .== 1.0), :caso] = "Ordenado"
+df[(df[:rng] .== "t") .& (df[:order] .== "f") .& (df[:random] .== 0.0), :caso] = "Aleatório"
+
+df_plot = df[df[:caso] .!= "", :]
+sort!(df_plot, :algo)
+sort!(df_plot, :size)
+
+df_plot[!, :msec] = df_plot[!, :time] .* 1000
+
+df_plot = df_plot[df_plot[:size] .== 1000000, :]
+
+plot(df_plot, x=:algo, y=:msec, color=:caso,
+  Geom.bar(position=:dodge), Scale.y_log10,
+  Guide.title("Tempo de Ordenação - 1.000.000 elementos"),
+  Guide.ylabel("Tempo (msec)"),
+  Guide.xlabel("Algoritmo"),
+  Guide.colorkey(title=""),
+  Theme(key_position=:top)
+) |> PDF("/tmp/tempo_ordenacao_1000000elementos.pdf")
+```

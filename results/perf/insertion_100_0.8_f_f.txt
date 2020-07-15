@@ -1,0 +1,23 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 insertion ./results/testset/100_0.8_f_f.bin':
+
+              2.12 msec task-clock:u              #    0.844 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               121      page-faults:u             #    0.057 M/sec                  
+         4,722,914      cycles:u                  #    2.227 GHz                      (74.53%)
+           512,208      stalled-cycles-frontend:u #   10.85% frontend cycles idle   
+           202,545      stalled-cycles-backend:u  #    4.29% backend cycles idle      (25.47%)
+         1,495,094      instructions:u            #    0.32  insn per cycle         
+                                                  #    0.34  stalled cycles per insn  (25.47%)
+           284,841      branches:u                #  134.313 M/sec                    (25.47%)
+            15,698      branch-misses:u           #    5.51% of all branches          (25.47%)
+
+       0.002511246 seconds time elapsed
+
+       0.002524000 seconds user
+       0.000000000 seconds sys
+
+

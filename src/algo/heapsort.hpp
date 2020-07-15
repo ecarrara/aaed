@@ -10,13 +10,11 @@ void heap_rebuild(std::vector<T> &in, size_t left, size_t right) {
     size_t aux = in[i];
 
     while (j <= right) {
-        if ((j < right) && (in[j] < in[j + 1])) {
-            j++; // j recebe outro filho de i
-        }
+        if ((j < right) && (in[j] < in[j + 1]))
+            j++;
 
-        if (aux >= in[j]) {
-            break; // heap ok!
-        }
+        if (aux >= in[j])
+            break;
 
         in[i] = in[j];
         i = j;
@@ -30,8 +28,8 @@ void heap_rebuild(std::vector<T> &in, size_t left, size_t right) {
  */
 template <typename T>
 void heap_build(std::vector<T> &in) {
-    for (int i = in.size() / 2 - 1; i >= 0; i--) {
-        heap_rebuild(in, i, in.size());
+    for (long long i = in.size() / 2 - 1; i >= 0; i--) {
+        heap_rebuild(in, i, in.size() - 1);
     }
 }
 

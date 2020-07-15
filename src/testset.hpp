@@ -1,11 +1,10 @@
 #ifndef TESTSET_H
 #define TESTSET_H
 
-#include <iostream>
-#include <vector>
-#include <random>
 #include <algorithm>
-
+#include <iostream>
+#include <random>
+#include <vector>
 
 /**
  *  Gera arranjo quase ordenado (iii).
@@ -53,6 +52,31 @@ std::vector<int> generate_set(size_t n, float f = 0.0, bool ascending = true, bo
     }
 
     return S;
+}
+
+/** Serializa vetor para um stream. */
+template <typename T>
+void serialize_vector(const std::vector<T> &in, std::ostream &s) {
+    size_t n = in.size();
+    s.write(reinterpret_cast<const char *>(&n), sizeof(size_t));
+    s.write(reinterpret_cast<const char *>(in.data()), sizeof(T) * n);
+}
+
+/** Deserializa vetor em um stream. */
+template <typename T>
+std::vector<T> deserialize_vector(std::istream &s) {
+    size_t n;
+    s.read(reinterpret_cast<char *>(&n), sizeof(n));
+
+    std::vector<T> out;
+    out.reserve(n);
+
+    while (n--) {
+        T el;
+        s.read(reinterpret_cast<char *>(&el), sizeof(T));
+        out.push_back(el);
+    }
+    return out;
 }
 
 #endif /* TESTSET_H */

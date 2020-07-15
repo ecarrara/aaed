@@ -1,0 +1,26 @@
+# started on Wed Jul 15 13:12:10 2020
+
+
+ Performance counter stats for './p1 quick ./results/testset/1000_0.8_f_t.bin':
+
+              2.04 msec task-clock:u              #    0.835 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               122      page-faults:u             #    0.060 M/sec                  
+         4,060,777      cycles:u                  #    1.994 GHz                    
+           540,793      stalled-cycles-frontend:u #   13.32% frontend cycles idle   
+     <not counted>      stalled-cycles-backend:u                                      (0.00%)
+     <not counted>      instructions:u                                                (0.00%)
+     <not counted>      branches:u                                                    (0.00%)
+     <not counted>      branch-misses:u                                               (0.00%)
+
+       0.002437118 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002459000 seconds sys
+
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

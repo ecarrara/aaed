@@ -1,0 +1,23 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 merge ./results/testset/100_0.8_f_t.bin':
+
+              2.06 msec task-clock:u              #    0.798 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               122      page-faults:u             #    0.059 M/sec                  
+         4,432,842      cycles:u                  #    2.152 GHz                      (76.28%)
+           454,883      stalled-cycles-frontend:u #   10.26% frontend cycles idle   
+            70,981      stalled-cycles-backend:u  #    1.60% backend cycles idle      (23.72%)
+           804,783      instructions:u            #    0.18  insn per cycle         
+                                                  #    0.57  stalled cycles per insn  (23.72%)
+           186,002      branches:u                #   90.287 M/sec                    (23.72%)
+            15,214      branch-misses:u           #    8.18% of all branches          (23.72%)
+
+       0.002581614 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002579000 seconds sys
+
+

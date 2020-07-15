@@ -1,0 +1,23 @@
+# started on Tue Jul 14 22:33:32 2020
+
+
+ Performance counter stats for './p1 cartesiantree ./results/testset/10000_1.0_f_t.bin':
+
+              3.68 msec task-clock:u              #    0.906 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               249      page-faults:u             #    0.068 M/sec                  
+         7,693,540      cycles:u                  #    2.091 GHz                    
+         1,562,631      stalled-cycles-frontend:u #   20.31% frontend cycles idle   
+         1,305,536      stalled-cycles-backend:u  #   16.97% backend cycles idle    
+         7,398,710      instructions:u            #    0.96  insn per cycle         
+                                                  #    0.21  stalled cycles per insn
+         1,340,121      branches:u                #  364.184 M/sec                  
+            15,790      branch-misses:u           #    1.18% of all branches        
+
+       0.004061659 seconds time elapsed
+
+       0.004096000 seconds user
+       0.000000000 seconds sys
+
+

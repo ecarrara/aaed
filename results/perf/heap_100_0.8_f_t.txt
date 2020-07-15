@@ -1,0 +1,23 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 heap ./results/testset/100_0.8_f_t.bin':
+
+              1.81 msec task-clock:u              #    0.771 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               121      page-faults:u             #    0.067 M/sec                  
+         3,717,456      cycles:u                  #    2.051 GHz                      (84.84%)
+           513,499      stalled-cycles-frontend:u #   13.81% frontend cycles idle   
+            64,164      stalled-cycles-backend:u  #    1.73% backend cycles idle      (15.16%)
+           340,702      instructions:u            #    0.09  insn per cycle         
+                                                  #    1.51  stalled cycles per insn  (15.16%)
+            61,262      branches:u                #   33.807 M/sec                    (15.16%)
+             5,810      branch-misses:u           #    9.48% of all branches          (15.16%)
+
+       0.002350999 seconds time elapsed
+
+       0.002214000 seconds user
+       0.000000000 seconds sys
+
+

@@ -6,10 +6,11 @@
 #include "algo/quicksort.hpp"
 #include "algo/selectionsort.hpp"
 #include "testset.hpp"
+#include <fstream>
 #include <string>
 
 template <typename T>
-void print_vector(std::vector<T> v);
+void print_vector(const std::vector<T> &v);
 
 // Indica ao compilador que um código assembly vai realizar
 // uma leitura de memória (em qualquer endereço).
@@ -27,38 +28,22 @@ static void clobber() {
 }
 
 /**
- * ./p1 <algoritmo> <n> <f> <ascendente> <aleatório>
- * 
- *  Parâmetros:
- *    size_t n - número de elementos no arranjo
- *    float f - percentual de elementos em ordem (1.0 arranjo ordenado)
- *    bool ascending - true para ordenação ascendente, false para descendente
- *    bool random - gera números aleatórios se `true`, caso contrário, números sequências.
+ * ./p1 <algoritmo> <testset>
  * 
  *  Exemplo:
- *    ./p1 insertion 100000 0.0 f t
+ *    ./p1 insertion ./results/testset/10_1.0_t_t.bin
  */
 int main(int argc, char **argv) {
-    if (argc < 2 || argc > 6) {
-        std::cerr << "Usage: " << argv[0] << " <algoritmo> [n (1 - +inf)] [f (0 - 1)] [ascending (t/f)] [random (t/f)]" << std::endl;
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <algoritmo> <testset>" << std::endl;
         return -1;
     }
 
     std::string algo = std::string(argv[1]);
 
-    size_t n = argc >= 3 ? std::stoll(argv[2]) : 10000;
-    float f = argc >= 4 ? std::stof(argv[3]) : 0.0;
-    bool ascending = argc >= 5 ? std::string(argv[4]) == "t" : true;
-    bool random = argc >= 6 ? std::string(argv[5]) == "t" : true;
-
-    std::cout << "Parâmetros da execuçao:" << std::endl
-              << "  algoritmo: " << algo << std::endl
-              << "  número de elementos: " << n << std::endl
-              << "  % de aleatórios: " << (f * 100.0) << "%" << std::endl
-              << "  ordenação: " << ascending << std::endl
-              << "  aleatório: " << random << std::endl;
-
-    std::vector<int> testset = generate_set(n, f, ascending, random);
+    std::ifstream input_file(argv[2], std::ios::binary);
+    std::vector<int> testset = deserialize_vector<int>(input_file);
+    // print_vector(testset);
 
     if (algo == "insertion") {
         insertion_sort(testset);
@@ -81,45 +66,16 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    // print_vector(testset);
     clobber();
 
     return 0;
 }
 
 template <typename T>
-void print_vector(std::vector<T> v) {
+void print_vector(const std::vector<T> &v) {
     for (int a : v) {
         std::cout << a << ' ';
-    }
-    std::cout << std::endl;
-}
-
-void debug_generate_set() {
-    std::cout << "(i) Arranjos ordenados números sequenciais:" << std::endl;
-    std::vector<int> a = generate_set(15, 1.0);
-    for (int v : a) {
-        std::cout << v << ' ';
-    }
-    std::cout << std::endl;
-
-    std::cout << "(ii) Arranjos inversamento ordenados com números sequenciais:" << std::endl;
-    a = generate_set(15, 1.0, false);
-    for (int v : a) {
-        std::cout << v << ' ';
-    }
-    std::cout << std::endl;
-
-    std::cout << "(iv) Arranjos com 80% ou mais dos elementos ordenados:" << std::endl;
-    a = generate_set(15, 0.8);
-    for (int v : a) {
-        std::cout << v << ' ';
-    }
-    std::cout << std::endl;
-
-    std::cout << "(iv) Arranjos aleatórios:" << std::endl;
-    a = generate_set(15, 0.0, true, true);
-    for (int v : a) {
-        std::cout << v << ' ';
     }
     std::cout << std::endl;
 }

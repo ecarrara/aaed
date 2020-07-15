@@ -1,0 +1,26 @@
+# started on Wed Jul 15 13:12:09 2020
+
+
+ Performance counter stats for './p1 bubble ./results/testset/100_0.8_f_f.bin':
+
+              2.16 msec task-clock:u              #    0.835 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               123      page-faults:u             #    0.057 M/sec                  
+         3,969,665      cycles:u                  #    1.837 GHz                    
+           593,192      stalled-cycles-frontend:u #   14.94% frontend cycles idle   
+     <not counted>      stalled-cycles-backend:u                                      (0.00%)
+     <not counted>      instructions:u                                                (0.00%)
+     <not counted>      branches:u                                                    (0.00%)
+     <not counted>      branch-misses:u                                               (0.00%)
+
+       0.002587964 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002605000 seconds sys
+
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

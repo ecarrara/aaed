@@ -1,0 +1,23 @@
+# started on Tue Jul 14 22:33:40 2020
+
+
+ Performance counter stats for './p1 quick ./results/testset/100000_0.0_f_t.bin':
+
+             18.40 msec task-clock:u              #    0.338 CPUs utilized          
+                 0      context-switches:u        #    0.000 K/sec                  
+                 0      cpu-migrations:u          #    0.000 K/sec                  
+               218      page-faults:u             #    0.012 M/sec                  
+        56,289,187      cycles:u                  #    3.060 GHz                    
+         5,693,209      stalled-cycles-frontend:u #   10.11% frontend cycles idle   
+           608,468      stalled-cycles-backend:u  #    1.08% backend cycles idle    
+        49,258,661      instructions:u            #    0.88  insn per cycle         
+                                                  #    0.12  stalled cycles per insn
+         9,407,651      branches:u                #  511.376 M/sec                  
+           679,674      branch-misses:u           #    7.22% of all branches        
+
+       0.054382202 seconds time elapsed
+
+       0.018900000 seconds user
+       0.000000000 seconds sys
+
+
